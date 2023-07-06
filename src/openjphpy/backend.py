@@ -115,8 +115,6 @@ def ojph_compress(
   if tileparts:
     args += ['-tileparts', f'{tileparts}']
     
-  print(args)
-    
   output = subprocess.run(
     args,
     capture_output = True
