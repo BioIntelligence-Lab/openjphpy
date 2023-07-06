@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 setup(
     name = 'openjphpy',
     version = '0.0.1',    
-    description = 'A Python build of OpenJPH for encoding and decoding High-Throughput JPEG 2000 (HTJ2K) images.',
+    description = 'A Python wrapper around OpenJPH for encoding and decoding High-Throughput JPEG 2000 (HTJ2K) images.',
     url = 'https://github.com/UM2ii/openjphpy',
     author = 'Pranav Kulkarni',
     author_email = 'pkulkarni@som.umaryland.edu',
