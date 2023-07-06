@@ -1,8 +1,8 @@
 from setuptools import setup, find_packages
 import subprocess
 
-src_path = 'src/openjph'
-build_path = 'src/openjph/build'
+src_path = 'src/openjphpy/openjph'
+build_path = 'src/openjphpy/openjph/build'
 
 cmake_linux = ['cmake', '-DCMAKE_BUILD_TYPE=Release', '-S', src_path, '-B', build_path]
 make_linux = ['make', '-C', build_path]
@@ -10,6 +10,8 @@ make_linux = ['make', '-C', build_path]
 def build_linux():
   subprocess.run(cmake_linux, stderr = subprocess.STDOUT)
   subprocess.run(make_linux, stderr = subprocess.STDOUT)
+
+build_linux()
 
 setup(
     name = 'openjphpy',
@@ -20,6 +22,7 @@ setup(
     author_email = 'pkulkarni@som.umaryland.edu',
     license = 'BSD',
     packages = find_packages(),
+    package_dir = {'': 'src'},
     install_requires = [
       'opencv-python',
       'numpy',

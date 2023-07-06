@@ -87,11 +87,11 @@ def ojph_compress(
     'ojph_compress',
     '-i', f'{input_path}',
     '-o', f'{output_path}',
-    '-num_decomps', f'{num_decomps}',
-    '-color_trans', f'{color_trans}',
+    '-num_decomps', f'{num_decomps}'.lower(),
+    '-colour_trans', f'{color_trans}'.lower(),
     '-prog_order', f'{prog_order}',
-    '-block_size', f'{{{block_size[0]},{block_size[1]}}}',
-    '-tlm_marker', f'{tlm_marker}',
+    '-block_size', f'{{{block_size[0]},{block_size[1]}}}'.lower(),
+    '-tlm_marker', f'{tlm_marker}'.lower(),
   ]
   
   if reversible == True:
@@ -107,17 +107,18 @@ def ojph_compress(
     raise ValueError('Invalid value for `reversible`! Usage: \n', OJPH_COMPRESS_USAGE)
   
   if precints:
-    args += ['-precints', f'{precints}']
+    args += ['-precints', f'{precints}'.lower()]
   if tile_offset:
-    args += ['-tile_offset', f'{tile_offset}']  
+    args += ['-tile_offset', f'{tile_offset}'.lower()]  
   if tile_size:
-    args += ['-tile_size', f'{tile_size}'] 
+    args += ['-tile_size', f'{tile_size}'.lower()] 
   if tileparts:
     args += ['-tileparts', f'{tileparts}']
     
+  print(args)
+    
   output = subprocess.run(
     args,
-    # shell = True, 
     capture_output = True
   )
   if output.stdout:
@@ -137,7 +138,7 @@ def ojph_expand(
     'ojph_expand',
     '-i', f'{input_path}',
     '-o', f'{output_path}',
-    '-resilient', f'{resilient}',
+    '-resilient', f'{resilient}'.lower(),
   ]
   
   if skip_res:
@@ -154,7 +155,6 @@ def ojph_expand(
   
   output = subprocess.run(
     args, 
-    # shell=True,
     capture_output=True
   )
   if output.stdout:
