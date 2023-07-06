@@ -1,4 +1,15 @@
 from setuptools import setup, find_packages
+import subprocess
+
+src_path = 'src/openjph'
+build_path = 'src/openjph/build'
+
+cmake_linux = ['cmake', '-DCMAKE_BUILD_TYPE=Release', '-S', src_path, '-B', build_path]
+make_linux = ['make', '-C', build_path]
+
+def build_linux():
+  subprocess.run(cmake_linux, stderr = subprocess.STDOUT)
+  subprocess.run(make_linux, stderr = subprocess.STDOUT)
 
 setup(
     name = 'openjphpy',
@@ -28,5 +39,6 @@ setup(
         "Topic :: Scientific/Engineering :: Medical Science Apps.",
         "Topic :: Software Development :: Libraries",
     ],
-    python_requires = ">=3.7"
+    python_requires = ">=3.7",
+    test_suite = 'tests',
 )

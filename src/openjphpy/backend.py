@@ -117,7 +117,7 @@ def ojph_compress(
     
   output = subprocess.run(
     args,
-    shell = True, 
+    # shell = True, 
     capture_output = True
   )
   if output.stdout:
@@ -154,7 +154,7 @@ def ojph_expand(
   
   output = subprocess.run(
     args, 
-    shell=True,
+    # shell=True,
     capture_output=True
   )
   if output.stdout:

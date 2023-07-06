@@ -1,1 +1,2 @@
-from openjphpy.src.openjphpy.backend import encode, decode
+from .backend import ojph_compress, ojph_expand
+from .core import encode, decode
