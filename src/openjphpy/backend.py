@@ -1,5 +1,30 @@
 import subprocess
 import numpy as np
+from enum import Enum
+from typing import Union
+
+def __format_args(x : Union[np.ndarray, tuple, list]):
+  x = np.array(x, dtype=int)
+  if x.ndim == 1:
+    x = np.expand_dims(x, axis=0)
+  formatted_str = []
+  for x_i in x:
+    if len(x_i) != 2:
+      raise ValueError('Invalid value! Input must be a sequence of two comma-separated values, enclosed within curly braces. See usage.')
+    formatted_str += [f'{{{x_i[0]},{x_i[1]}}}']
+  return ','.join(formatted_str)
+
+class ProgressionOrder(Enum):
+  LRCP = 0
+  RLCP = 1
+  RPCL = 2
+  PCRL = 3
+  CPRL = 4
+  
+class Tileparts(Enum):
+  R = 0
+  C = 1
+  RC = 2
 
 OJPH_COMPRESS_USAGE = """
 The following arguments are necessary:
@@ -67,30 +92,29 @@ The following arguments are options:
 """
 
 def ojph_compress(
-  input_path,
-  output_path,
-  num_decomps = 5,
-  qstep = 0.0039,
-  reversible = False,
-  color_trans = True,
-  prog_order = 'RPCL',
-  block_size = (64,64),
-  precints = None,
-  tile_offset = None,
-  tile_size = None,
-  tileparts = None,
-  tlm_marker = False,
+  input_path : str,
+  output_path : str,
+  num_decomps : int = 5,
+  qstep : float = 0.0039,
+  reversible : bool = False,
+  color_trans : bool = True,
+  prog_order : ProgressionOrder = ProgressionOrder.RPCL,
+  block_size : Union[np.ndarray, tuple[int, int], list[int]] = (64,64),
+  precints : Union[np.ndarray, list[tuple[int,int]]] = None,
+  tile_offset : Union[np.ndarray, tuple[int, int], list[int]] = None,
+  tile_size : Union[np.ndarray, tuple[int, int], list[int]] = None,
+  image_offset : Union[np.ndarray, tuple[int, int], list[int]] = None,
+  tileparts : Tileparts = None,
+  tlm_marker : bool = False
 ):
-  # args = f'ojph_compress -i "{input_path}" -o "{output_path}" -reversible true -num_decomps {num_decomps} -tlm_marker true -tileparts R', 
-  
   args = [
     'ojph_compress',
     '-i', f'{input_path}',
     '-o', f'{output_path}',
     '-num_decomps', f'{num_decomps}'.lower(),
     '-colour_trans', f'{color_trans}'.lower(),
-    '-prog_order', f'{prog_order}',
-    '-block_size', f'{{{block_size[0]},{block_size[1]}}}'.lower(),
+    '-prog_order', f'{prog_order}'.upper(),
+    '-block_size', __format_args(block_size),
     '-tlm_marker', f'{tlm_marker}'.lower(),
   ]
   
@@ -107,13 +131,15 @@ def ojph_compress(
     raise ValueError('Invalid value for `reversible`! Usage: \n', OJPH_COMPRESS_USAGE)
   
   if precints:
-    args += ['-precints', f'{precints}'.lower()]
+    args += ['-precints', __format_args(precints)]
   if tile_offset:
-    args += ['-tile_offset', f'{tile_offset}'.lower()]  
+    args += ['-tile_offset', __format_args(tile_offset)]  
   if tile_size:
-    args += ['-tile_size', f'{tile_size}'.lower()] 
+    args += ['-tile_size', __format_args(tile_size)] 
+  if image_offset:
+    args += ['-image_offset', __format_args(image_offset)] 
   if tileparts:
-    args += ['-tileparts', f'{tileparts}']
+    args += ['-tileparts', f'{tileparts}'.upper()]
     
   output = subprocess.run(
     args,
@@ -122,16 +148,14 @@ def ojph_compress(
   if output.stdout:
     return float(output.stdout.decode('utf-8').replace('Elapsed time = ', ''))
   else:
-    raise ValueError(output.stderr)
+    raise ValueError(output.stderr.decode('utf-8'))
 
 def ojph_expand(
-  input_path,
-  output_path,
-  skip_res = None,
-  resilient = False
+  input_path : str,
+  output_path : str,
+  skip_res : Union[int, np.ndarray, tuple[int,int], list[int]] = None,
+  resilient : bool = False
 ):
-  # args = f'ojph_expand -i "{input_path}" -o "{output_path}" -skip_res {skip_res}'
-  
   args = [
     'ojph_expand',
     '-i', f'{input_path}',
@@ -158,4 +182,4 @@ def ojph_expand(
   if output.stdout:
     return float(output.stdout.decode('utf-8').replace('Elapsed time = ', ''))
   else:
-    raise ValueError(output.stderr)
+    raise ValueError(output.stderr.decode('utf-8'))
