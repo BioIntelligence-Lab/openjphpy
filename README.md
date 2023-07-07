@@ -52,7 +52,7 @@ In the future, we intend to extend support to non-Linux environments. Similarly,
 
 ## Documentation
 
-Complete documentation for openjphpy is available [here](openjphpy/docs/openjphpy.md).
+Complete documentation for openjphpy is available [here](./docs/openjphpy.md).
 
 ## Contact
 
