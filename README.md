@@ -19,8 +19,9 @@ For more resources regarding HTJ2K, please refer to:
 
 ### Citation
 
-If you use openjphpy in your publication, please cite it using:
+If you use openjphpy in your publication, please cite the following:
 
+- GitHub
 ```text
 @software{openjphpy,
 author = {Kulkarni, Pranav},
@@ -29,6 +30,10 @@ month = {July},
 year = {2023},
 url = {https://github.com/UM2ii/openjphpy}
 }
+```
+- Publication
+``` 
+Kulkarni P, Kanhere A, Siegel E, Yi PH, Parekh VS. One Copy Is All You Need: Resource-Efficient Streaming of Medical Imaging Data at Scale. arXiv preprint arXiv:2307.00438. 2023 Jul 1.
 ```
 
 ## Getting Started
@@ -44,11 +49,11 @@ pip install -e openjphpy/
 
 ### Example Notebook
 
-We have provides an example notebook in this repository, along with 10 test images, to experiment with. You can find the example notebook [here](openjphpy/notebooks/example.ipynb).
+We have provided an example notebook in this repository, along with 10 test images, to experiment with. You can find the example notebook [here](openjphpy/notebooks/example.ipynb).
 
 ## Future Work
 
-In the future, we intend to extend support to non-Linux environments. Similarly, we intend to employ a similar approach used by [openjphjs](https://github.com/chafey/openjphjs) to integrate native C++ code directly into Python. While our currently implementation supports the entire feature set of OpenJPH, it is not the most efficient implementation. We invite collaborators in the open-source community to help integrate with OpenJPH's native C++ code with direct encode/decode capabilities in Python.
+In the future, we intend to extend support to non-Linux environments. Similarly, we intend to employ a similar approach used by [openjphjs](https://github.com/chafey/openjphjs) to integrate native C++ code directly into Python. While our current implementation supports the entire feature set of OpenJPH, it is not computationally optimized. We invite collaborators in the open-source community to help integrate with OpenJPH's native C++ code with direct encode/decode capabilities in Python.
 
 ## Documentation
 
