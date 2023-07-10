@@ -32,8 +32,13 @@ url = {https://github.com/UM2ii/openjphpy}
 }
 ```
 - Publication
-``` 
-Kulkarni P, Kanhere A, Siegel E, Yi PH, Parekh VS. One Copy Is All You Need: Resource-Efficient Streaming of Medical Imaging Data at Scale. arXiv preprint arXiv:2307.00438. 2023 Jul 1.
+```text
+@article{kulkarni2023one,
+  title={One Copy Is All You Need: Resource-Efficient Streaming of Medical Imaging Data at Scale},
+  author={Kulkarni, Pranav and Kanhere, Adway and Siegel, Eliot and Yi, Paul H and Parekh, Vishwa S},
+  journal={arXiv preprint arXiv:2307.00438},
+  year={2023}
+}
 ```
 
 ## Getting Started
