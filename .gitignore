@@ -1,5 +1,5 @@
 # Custom
-data/*/encoded
+data/encoded
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
