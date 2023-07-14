@@ -50,23 +50,25 @@ git clone --recurse-submodules https://github.com/UM2ii/openjphpy
 pip install -e openjphpy/
 ```
 
+Documentation for openjphpy is available [here](./docs/openjphpy.md).
+
 **Note:** openjphpy is only supported on Linux based environments with support for other environments coming in the future.
 
 ### Example Notebook
 
 We have provided an example notebook in this repository, along with 10 test images, to experiment with. You can find the example notebook [here](openjphpy/notebooks/example.ipynb).
 
+We also provide [15 sample medical images](./data/) across X-ray, MRI, and CT modalities (5 images per modality), with data sourced from the [NIH Chest X-Ray 14](https://arxiv.org/abs/1705.02315) and [Medical Segmentation Decathlon (MSD)](http://medicaldecathlon.com/) datasets. For portability, all data is stored as `npy` files. 
+
+**Note:** CT data is stored as uint16 and not in Hounsfield units.
+
 ## Limitations
 
-Currently, openjphpy can only encode imaging data with types 8-bit and 16-bit unsigned integers (uint8 and uint16). If pixel values fall outside the range [0, 65,535], an error may be raised (strict mode) or values will be clipped (non-strict mode). Precision is automatically chosen based on image data's dynamic range
+Currently, openjphpy does not support encoding signed data and can only encode imaging data with types 8-bit and 16-bit unsigned integers (uint8 and uint16). If pixel values fall outside the range [0, 65,535], an error may be raised (strict mode) or values will be clipped (non-strict mode). Precision is automatically chosen based on image data's dynamic range.
 
 ## Future Work
 
 In the future, we intend to extend support to non-Linux environments. Similarly, we intend to employ a similar approach used by [openjphjs](https://github.com/chafey/openjphjs) to integrate native C++ code directly into Python. While our current implementation supports the entire feature set of OpenJPH, it is not computationally optimized. We invite collaborators in the open-source community to help integrate with OpenJPH's native C++ code with direct encode/decode capabilities in Python.
-
-## Documentation
-
-Complete documentation for openjphpy is available [here](./docs/openjphpy.md).
 
 ## Contact
 
