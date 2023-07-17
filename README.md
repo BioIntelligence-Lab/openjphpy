@@ -43,7 +43,13 @@ url = {https://github.com/UM2ii/openjphpy}
 
 ## Getting Started
 
-Currently, openjphpy can only be installed manually from source.
+Currently, openjphpy can be installed from `pip` or installed manually from source.
+
+```text
+pip install openjphpy
+```
+
+### Manual Installation
 
 ```text
 git clone --recurse-submodules https://github.com/UM2ii/openjphpy

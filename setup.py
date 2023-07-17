@@ -1,6 +1,7 @@
 from setuptools import setup, find_packages
 import subprocess
 import sys
+from pathlib import Path
 
 src_path = 'src/openjphpy/openjph'
 build_path = 'src/openjphpy/openjph/build'
@@ -36,10 +37,15 @@ def compile_openjph():
   else:
     raise NotImplementedError('Currently only linux support is implemented')
 
+this_directory = Path(__file__).parent
+long_description = (this_directory / "README.md").read_text()
+
 setup(
     name = 'openjphpy',
     version = '0.1.0',    
-    description = 'A Python wrapper around OpenJPH for encoding and decoding High-Throughput JPEG 2000 (HTJ2K) images.',
+    description = 'A Python build of OpenJPH for encoding and decoding High-Throughput JPEG 2000 (HTJ2K) images',
+    long_description = long_description,
+    long_description_content_type = 'text/markdown',
     url = 'https://github.com/UM2ii/openjphpy',
     author = 'Pranav Kulkarni',
     author_email = 'pkulkarni@som.umaryland.edu',
